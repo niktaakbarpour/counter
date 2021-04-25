@@ -6,13 +6,11 @@ const useStyles = makeStyles((theme) => ({
         width: '100vw',
         height: '100vh',
         backgroundColor: theme.palette.background.default,
-        overflow: "hidden",
-
+        overflow: 'hidden',
     },
 }));
 
 export default function AppRoot() {
-
     const classes = useStyles();
 
     return (

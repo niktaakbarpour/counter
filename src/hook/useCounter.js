@@ -11,6 +11,7 @@ export default function useCounter() {
 
     useEffect(() => {
         if (!isPaused) {
+            checkAndClearInterval();
             countRef.current = setInterval(() => {
                     setCounter((currentTimer) => {
                             return (currentTimer + 1)
@@ -26,51 +27,50 @@ export default function useCounter() {
         if (countRef.current !== null) {
             clearInterval(countRef.current)
         }
-    }
+    };
 
     const startPause = () => {
-        checkAndClearInterval();
         if (isPaused) {
             setIsActive(true)
             setIsPaused(false)
         } else {
+            checkAndClearInterval();
             setIsPaused(true)
         }
     };
 
     const changeInput = (amount) => {
-        checkAndClearInterval();
         if (amount <= 0) {
             setInput(100)
         } else {
             setInput(amount)
         }
-    }
+    };
 
     const reset = () => {
         checkAndClearInterval();
         setIsActive(false)
         setIsPaused(true)
         setCounter(0)
-    }
+    };
 
     const increase = (amount) => {
         changeInput(input + amount)
-    }
+    };
 
     const decrease = (amount) => {
         changeInput(input - amount)
-    }
+    };
 
     return {
         startPause,
         changeInput,
         reset,
+        increase,
+        decrease,
         counter,
         isPaused,
         isActive,
-        increase,
-        decrease,
         input
     };
 }

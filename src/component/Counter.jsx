@@ -13,47 +13,67 @@ const useStyles = makeStyles((theme) => ({
     container: {
         width: '100vw',
         height: '100vh',
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between"
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
     },
+
     inputBase: {
         "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
-            "-webkit-appearance": "none",
-            margin: 0
+            "-webkit-appearance": 'none',
+            margin: 0,
         },
         backgroundColor: theme.palette.primary.main,
         borderRadius: theme.shape.borderRadius,
         margin: theme.spacing(1),
-        textAlign: "center"
+        textAlign: 'center'
     },
+
     buttonAndInputContainer: {
-        display: "flex",
-        justifyContent: "space-around",
+        display: 'flex',
+        justifyContent: 'space-around',
         [theme.breakpoints.down('xs')]: {
-            flexDirection: "column-reverse"
+            flexDirection: 'column-reverse',
         },
     },
+
     counter: {
-        margin: "auto"
+        margin: 'auto',
     },
+
     icon: {
-        fontSize: "xxx-large",
-        color: theme.palette.common.black
+        fontSize: 'xxx-large',
+        color: theme.palette.common.black,
     },
+
     inputBaseContainer: {
-        alignSelf: "center",
+        alignSelf: 'center',
         [theme.breakpoints.down('xs')]: {
-            margin: theme.spacing(0, 1, 0, 1)
+            margin: theme.spacing(0, 1, 0, 1),
         },
-    }
+    },
+
+    repeatable: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+
+    enableResetIcon: {
+        color: theme.palette.common.black,
+        fontSize:'xxx-large',
+    },
+
+    disableResetIcon: {
+        color: theme.palette.disable,
+        fontSize:'xxx-large',
+    },
 }));
 
 const theme = createMuiTheme({
     overrides: {
         MuiInputBase: {
             input: {
-                textAlign: "center"
+                textAlign: 'center',
             },
         },
     },
@@ -65,7 +85,7 @@ export default function Counter() {
 
     const handleInputChange = (e) => {
         counterHook.changeInput(Number(e.target.value));
-    }
+    };
 
     return (
         <div className={classes.container}>
@@ -76,12 +96,13 @@ export default function Counter() {
                     onClick={counterHook.reset}
                     disabled={!counterHook.isActive}
                 >
-                    <ReplayOutlinedIcon className={classes.icon}/>
+                    <ReplayOutlinedIcon className={counterHook.isActive ? classes.enableResetIcon : classes.disableResetIcon} />
                 </IconButton>
                 <Repeatable
                     repeatInterval={100}
                     onPress={() => counterHook.decrease(100)}
                     onHold={() => counterHook.decrease(100)}
+                    className={classes.repeatable}
                 >
                     <IconButton>
                         <RemoveOutlinedIcon className={classes.icon}/>
@@ -90,7 +111,6 @@ export default function Counter() {
                 <div className={classes.inputBaseContainer}>
                     <ThemeProvider theme={theme}>
                         <InputBase
-                            placeholder="Enter In Milli Seconds"
                             type="number"
                             className={classes.inputBase}
                             onChange={handleInputChange}
@@ -102,6 +122,7 @@ export default function Counter() {
                     repeatInterval={100}
                     onPress={() => counterHook.increase(100)}
                     onHold={() => counterHook.increase(100)}
+                    className={classes.repeatable}
                 >
                     <IconButton>
                         <AddOutlinedIcon className={classes.icon}/>
