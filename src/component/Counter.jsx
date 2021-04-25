@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
             flexDirection: "column-reverse"
         },
     },
-    timer: {
+    counter: {
         margin: "auto"
     },
     icon: {
@@ -69,7 +69,7 @@ export default function Counter() {
 
     return (
         <div className={classes.container}>
-            <Typography variant="h1" className={classes.timer}>{counterHook.counter}</Typography>
+            <Typography variant="h1" className={classes.counter}>{counterHook.counter}</Typography>
 
             <div className={classes.buttonAndInputContainer}>
                 <IconButton
